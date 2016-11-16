@@ -1,15 +1,21 @@
 #! /bin/bash
+set -o nounset
+set -o errexit
 
 send=`date '+%Y-%m-%d %H:%M'`
 Author=${1}
 
 myPages=(
-  index
-  test
-  log
+	test
+)
+
+defaultPages=(
+	index
+	log
 )
 
 myPagesLen=${#myPages[@]}
+defaultPagesLen=${#defaultPages[@]}
 
 # 创建 主文件夹
 if [ ! -d "DEMO" ]; then
@@ -126,7 +132,54 @@ if [ ! -d "pages" ]; then
   mkdir pages
 fi
 
+cd pages
 
+for PagePath in ${myPages[@]}
+do
+  echo ${PagePath}
+  if [ ! -d ${PagePath} ]; then
+    mkdir ${PagePath}
+  fi
+
+  cd ${PagePath}
+  echo "/**
+    * ${send} By ${1}
+    * ${PagePath}.js
+    */
+
+  var app = getApp()
+  Page({
+    data: {
+      motto: 'Hello World',
+      userInfo: {}
+    },
+    //事件处理函数
+    bindViewTap: function() {
+      wx.navigateTo({
+        url: '../logs/logs'
+      })
+    },
+    onLoad: function () {
+      console.log('onLoad')
+      var that = this
+      //调用应用实例的方法获取全局数据
+      app.getUserInfo(function(userInfo){
+        //更新数据
+    	that.setData({
+          userInfo:userInfo
+        })
+      })
+    }
+  })" > ${PagePath}.js
+  cd ..
+
+done
+
+# index start
+if [ ! -d "index" ]; then
+  mkdir index
+fi
+cd index
 echo "/**
   * ${send} By ${1}
   * index.js
@@ -134,28 +187,125 @@ echo "/**
 
 var app = getApp()
 Page({
-  data: {
-    motto: 'Hello World',
-    userInfo: {}
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    console.log('onLoad')
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo
-      })
-    })
-  }
+    data: {
+        motto: 'Hello World',
+        userInfo: {}
+    },
+    //事件处理函数
+    bindViewTap: function() {
+        wx.navigateTo({
+            url: '../logs/logs'
+        })
+    },
+    onLoad: function() {
+        console.log('onLoad')
+        var that = this
+        //调用应用实例的方法获取全局数据
+        app.getUserInfo(function(userInfo) {
+            //更新数据
+            that.setData({
+                userInfo: userInfo
+            })
+        })
+    }
 })" > index.js
+
+echo '<!--index.wxml-->
+<view class="container">Ï
+	<view bindtap="bindViewTap" class="userinfo">
+		<image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+		<text class="userinfo-nickname">{{userInfo.nickName}}</text>
+	</view>
+	<view class="usermotto">
+		<text class="user-motto">{{motto}}</text>
+	</view>
+</view>' > index.wxml
+
+echo "/**
+  * ${send} By ${1}
+  * index.wxss
+  */
+
+.userinfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.userinfo-avatar {
+	width: 128rpx;
+	height: 128rpx;
+	margin: 20rpx;
+	border-radius: 50%;
+}
+
+.userinfo-nickname {
+	color: #aaa;
+}
+
+.usermotto {
+	margin-top: 200px;
+}" > index.wxss
+
+cd ..
+# index end
+
+# logs start
+if [ ! -d "logs" ]; then
+  mkdir logs
+fi
+cd logs
+
+echo "/**
+  * ${send} By ${1}
+  * logs.js
+  */
+
+var util = require('../../utils/util.js')
+Page({
+	data: {
+		logs: []
+	},
+	onLoad: function () {
+		this.setData({
+			logs: (wx.getStorageSync('logs') || []).map(function (log) {
+				return util.formatTime(new Date(log))
+			})
+		})
+	}
+})" > logs.js
+
+echo '<!--logs.wxml-->
+<view class="container log-list">
+	<block wx:for="{{logs}}" wx:for-item="log" wx:key="*this">
+		<text class="log-item">{{index + 1}}. {{log}}</text>
+	</block>
+</view>' > logs.wxml
+
+echo "/**
+  * ${send} By ${1}
+  * logs.wxss
+  */
+
+.log-list {
+	display: flex;
+	flex-direction: column;
+	padding: 40rpx;
+}
+.log-item {
+	margin: 10rpx;
+}
+" > logs.wxss
+
+echo '{
+	"navigationBarTitleText": "查看启动日志"
+}' > logs.json
+
+cd ..
+# logs end
+
+# 退回项目根目录
+cd ..
 
 # 放图片文件夹
 if [ ! -d "images" ]; then
