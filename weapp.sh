@@ -7,6 +7,7 @@ Author=${1}
 
 myPages=(
 	test
+	shit
 )
 
 defaultPages=(

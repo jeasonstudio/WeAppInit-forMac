@@ -1,12 +1,12 @@
 /****
 	* 2016-11-16 15:25 By Jeason
-	* test.js
+	* shit.js
 	*/
 
 Page({
 	data: {
 	},
 	onLoad: function () {
-		console.log('test Load Success');
+		console.log('shit Load Success');
 	}
 })
