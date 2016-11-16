@@ -53,7 +53,8 @@ echo "{
 		\"connectSocket\": 20000,
 		\"uploadFile\": 20000,
 		\"downloadFile\": 20000
-	}
+	},
+	\"debug\": true
 }" > app.json
 
 # 创建 app.wxss
