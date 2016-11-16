@@ -2,7 +2,8 @@
 	"pages": [
 		"pages/index/index",
 		"pages/log/log",
-		"pages/Jeason/Jeason"
+		"pages/Jeason/Jeason",
+		"pages/perfect/perfect"
 	],
 	"window": {
 		"navigationBarTextStyle": "",

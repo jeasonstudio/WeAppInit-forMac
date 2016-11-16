@@ -1,12 +1,12 @@
 /****
 	* 2016-11-16 16:46 By Jeason
-	* Jeason.js
+	* perfect.js
 	*/
 
 Page({
 	data: {
 	},
 	onLoad: function () {
-		console.log('Jeason Load Success');
+		console.log('perfect Load Success');
 	}
 })
