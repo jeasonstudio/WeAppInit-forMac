@@ -17,6 +17,14 @@ Author=${1}
 # if cd pages
 # else mkdir pages
 
+
+# 创建 主文件夹
+if [ ! -d " DEMO" ]; then
+  mkdir DEMO
+fi
+
+cd DEMO
+
 # 创建 app.json
 echo '{
   "pages": [
