@@ -1,7 +1,8 @@
 /**
-  * 2016-11-16 14:01 By Jeason
+  * 2016-11-16 14:08 By Jeason
   * app.js
   */
+
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据

@@ -17,6 +17,7 @@ Author=${1}
 # if cd pages
 # else mkdir pages
 
+# 创建 app.json
 echo '{
   "pages": [
     "pages/index/index",
@@ -36,6 +37,7 @@ echo '{
   }
 }' > app.json
 
+# 创建 app.wxss
 echo '/**app.wxss**/
 
 .container {
@@ -48,6 +50,7 @@ echo '/**app.wxss**/
   box-sizing: border-box;
 } ' > app.wxss
 
+# 创建 app.js
 echo "/**
   * ${send} By ${Author}
   * app.js
@@ -83,20 +86,51 @@ App({
   }
 })" > app.js
 
+# 创建 utils
+if [ ! -d "utils" ]; then
+  mkdir utils
+fi
+
+cd utils
+echo "/**
+  * ${send} By ${1}
+  * util.js
+  */
+  
+function formatTime(date) {
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+
+  var hour = date.getHours()
+  var minute = date.getMinutes()
+  var second = date.getSeconds()
+
+
+  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+function formatNumber(n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+module.exports = {
+  formatTime: formatTime
+}" > util.js
+
+cd ..
 
 if [ ! -d "pages" ]; then
   mkdir pages
 fi
 
-if [ ! -d "utils" ]; then
-  mkdir utils
-fi
 
 echo "/**
   * ${send} By ${1}
   * index.js
   */
-  
+
 var app = getApp()
 Page({
   data: {

@@ -1,7 +1,8 @@
 /**
-  * 2016-11-16 14:01 By Jeason
+  * 2016-11-16 14:08 By Jeason
   * index.js
   */
+
 var app = getApp()
 Page({
   data: {
