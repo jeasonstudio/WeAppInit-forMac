@@ -3,7 +3,8 @@
 		"pages/index/index",
 		"pages/log/log",
 		"pages/Jeason/Jeason",
-		"pages/perfect/perfect"
+		"pages/perfect/perfect",
+		"pages/aaa/aaa"
 	],
 	"window": {
 		"navigationBarTextStyle": "",

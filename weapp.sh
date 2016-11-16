@@ -24,7 +24,6 @@ do
 		\"pages/${item}/${item}\""
 done
 
-
 # 默认的文件目录，没卵用
 defaultPages=(index log)
 
