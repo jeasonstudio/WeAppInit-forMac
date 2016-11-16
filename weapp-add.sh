@@ -10,6 +10,17 @@ send=`date '+%Y-%m-%d %H:%M'`
 Author=${1}
 Path=${2}
 
+cd ${Path}
+
+for PagePath in ${myPages[@]}
+do
+dataPath="\"pages/${PagePath}/${PagePath}\","
+sed -i '' "/pages\/log/a\\
+$dataPath \\
+" app.json
+done
+cd ..
+
 cd ${Path}/pages
 
 
@@ -50,6 +61,8 @@ echo "/****
 
 echo "{}" > ${PagePath}.json
 
-cd .
+cd ..
 
 done
+
+cd ..
