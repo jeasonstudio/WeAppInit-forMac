@@ -1,7 +1,7 @@
-/**
-  * 2016-11-16 15:03 By Jeason
-  * logs.js
-  */
+/****
+	* 2016-11-16 15:24 By Jeason
+	* logs.js
+	*/
 
 var util = require('../../utils/util.js')
 Page({

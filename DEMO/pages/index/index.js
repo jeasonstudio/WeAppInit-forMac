@@ -1,7 +1,7 @@
-/**
-  * 2016-11-16 15:03 By Jeason
-  * index.js
-  */
+/****
+	* 2016-11-16 15:24 By Jeason
+	* index.js
+	*/
 
 var app = getApp()
 Page({

@@ -26,71 +26,71 @@ cd DEMO
 
 # 创建 app.json
 echo '{
-  "pages": [
-    "pages/index/index",
-    "pages/log/log"
-  ],
-  "window": {
-    "navigationBarTextStyle": "",
-    "navigationBarTitleText": "",
-    "navigationBarBackgroundColor": "",
-    "backgroundColor": ""
-  },
-  "networkTimeout": {
-    "request": 20000,
-    "connectSocket": 20000,
-    "uploadFile": 20000,
-    "downloadFile": 20000
-  }
+	"pages": [
+		"pages/index/index",
+		"pages/log/log"
+	],
+	"window": {
+		"navigationBarTextStyle": "",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "",
+		"backgroundColor": ""
+	},
+	"networkTimeout": {
+		"request": 20000,
+		"connectSocket": 20000,
+		"uploadFile": 20000,
+		"downloadFile": 20000
+	}
 }' > app.json
 
 # 创建 app.wxss
 echo '/**app.wxss**/
 
 .container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: 200rpx 0;
+	box-sizing: border-box;
 } ' > app.wxss
 
 # 创建 app.js
-echo "/**
+echo "/****
   * ${send} By ${Author}
   * app.js
   */
 
 App({
-  onLaunch: function () {
-    //调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-  },
-  getUserInfo:function(cb){
-    var that = this
-    if(this.globalData.userInfo){
-      typeof cb == 'function' && cb(this.globalData.userInfo)
-    }else{
-      //调用登录接口
-      wx.login({
-        success: function () {
-          wx.getUserInfo({
-            success: function (res) {
-              that.globalData.userInfo = res.userInfo
-              typeof cb == 'function' && cb(that.globalData.userInfo)
-            }
-          })
-        }
-      })
-    }
-  },
-  globalData:{
-    userInfo:null
-  }
+	onLaunch: function () {
+		//调用API从本地缓存中获取数据
+		var logs = wx.getStorageSync('logs') || []
+		logs.unshift(Date.now())
+		wx.setStorageSync('logs', logs)
+	},
+	getUserInfo: function (cb) {
+		var that = this
+		if (this.globalData.userInfo) {
+			typeof cb == 'function' && cb(this.globalData.userInfo)
+		} else {
+			//调用登录接口
+			wx.login({
+				success: function () {
+					wx.getUserInfo({
+						success: function (res) {
+							that.globalData.userInfo = res.userInfo
+							typeof cb == 'function' && cb(that.globalData.userInfo)
+						}
+					})
+				}
+			})
+		}
+	},
+	globalData: {
+		userInfo: null
+	}
 })" > app.js
 
 # 创建 utils
@@ -99,31 +99,31 @@ if [ ! -d "utils" ]; then
 fi
 
 cd utils
-echo "/**
+echo "/****
   * ${send} By ${1}
   * util.js
   */
   
 function formatTime(date) {
-  var year = date.getFullYear()
-  var month = date.getMonth() + 1
-  var day = date.getDate()
+	var year = date.getFullYear()
+	var month = date.getMonth() + 1
+	var day = date.getDate()
 
-  var hour = date.getHours()
-  var minute = date.getMinutes()
-  var second = date.getSeconds()
+	var hour = date.getHours()
+	var minute = date.getMinutes()
+	var second = date.getSeconds()
 
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+	return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 function formatNumber(n) {
-  n = n.toString()
-  return n[1] ? n : '0' + n
+	n = n.toString()
+	return n[1] ? n : '0' + n
 }
 
 module.exports = {
-  formatTime: formatTime
+	formatTime: formatTime
 }" > util.js
 
 cd ..
@@ -142,7 +142,7 @@ do
   fi
 
   cd ${PagePath}
-echo "/**
+echo "/****
 	* ${send} By ${1}
 	* ${PagePath}.js
 	*/
@@ -157,7 +157,7 @@ Page({
 
 echo "<!--${PagePath}.wxml-->" > ${PagePath}.wxml
 
-echo "/**
+echo "/****
 	* ${send} By ${1}
 	* ${PagePath}.wxss
 	*/" > ${PagePath}.wxss
@@ -173,10 +173,10 @@ if [ ! -d "index" ]; then
   mkdir index
 fi
 cd index
-echo "/**
-  * ${send} By ${1}
-  * index.js
-  */
+echo "/****
+	* ${send} By ${1}
+	* index.js
+	*/
 
 var app = getApp()
 Page({
@@ -214,10 +214,10 @@ echo '<!--index.wxml-->
 	</view>
 </view>' > index.wxml
 
-echo "/**
-  * ${send} By ${1}
-  * index.wxss
-  */
+echo "/****
+	* ${send} By ${1}
+	* index.wxss
+	*/
 
 .userinfo {
 	display: flex;
@@ -249,10 +249,10 @@ if [ ! -d "logs" ]; then
 fi
 cd logs
 
-echo "/**
-  * ${send} By ${1}
-  * logs.js
-  */
+echo "/****
+	* ${send} By ${1}
+	* logs.js
+	*/
 
 var util = require('../../utils/util.js')
 Page({
@@ -275,10 +275,10 @@ echo '<!--logs.wxml-->
 	</block>
 </view>' > logs.wxml
 
-echo "/**
-  * ${send} By ${1}
-  * logs.wxss
-  */
+echo "/****
+	* ${send} By ${1}
+	* logs.wxss
+	*/
 
 .log-list {
 	display: flex;
