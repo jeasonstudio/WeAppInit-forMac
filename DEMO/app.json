@@ -1,7 +1,8 @@
 {
 	"pages": [
 		"pages/index/index",
-		"pages/log/log"
+		"pages/log/log",
+		"pages/Jeason/Jeason"
 	],
 	"window": {
 		"navigationBarTextStyle": "",

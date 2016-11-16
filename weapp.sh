@@ -11,16 +11,18 @@ echo "名为${rootName}的小程序创建成功
 ==============================================
 "
 myPages=()
-echo "输入预制的页面：(index,log默认存在，不加后缀，空格隔开，回车生成)"
+echo "输入预制的页面：(index,log默认存在，空格隔开，不加后缀，回车生成)"
 read -a myPages
 
 thPage="\"pages\": [
 		\"pages/index/index\",
 		\"pages/log/log\""
 
-# for item in ${myPages[@]}
-# do
-# done
+for item in ${myPages[@]}
+do
+	thPage="${thPage},
+		\"pages/${item}/${item}\""
+done
 
 
 # 默认的文件目录，没卵用
