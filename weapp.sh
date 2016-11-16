@@ -2,6 +2,8 @@
 set -o nounset
 set -o errexit
 
+echo "小程序主文件夹名："
+
 send=`date '+%Y-%m-%d %H:%M'`
 Author=${1}
 
@@ -10,10 +12,8 @@ myPages=(
 	shit
 )
 
-defaultPages=(
-	index
-	log
-)
+# 默认的文件目录，没卵用
+defaultPages=(index log)
 
 myPagesLen=${#myPages[@]}
 defaultPagesLen=${#defaultPages[@]}
@@ -137,7 +137,7 @@ cd pages
 
 for PagePath in ${myPages[@]}
 do
-  echo ${PagePath}
+  echo " 😊 ${PagePath}目录创建成功"
   if [ ! -d ${PagePath} ]; then
     mkdir ${PagePath}
   fi
