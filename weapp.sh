@@ -3,23 +3,16 @@
 send=`date '+%Y-%m-%d %H:%M'`
 Author=${1}
 
-# echo "$1,$2"
+myPages=(
+  index
+  test
+  log
+)
 
-# while read pages
-# do
-#  echo $pages
-#  echo "PARAB:"$parab
-#  echo "PARAC:"$parac
-# done < app.json
-
-# grep -Po '"navigationBarTextStyle":".*?"'
-
-# if cd pages
-# else mkdir pages
-
+myPagesLen=${#myPages[@]}
 
 # 创建 主文件夹
-if [ ! -d " DEMO" ]; then
+if [ ! -d "DEMO" ]; then
   mkdir DEMO
 fi
 
