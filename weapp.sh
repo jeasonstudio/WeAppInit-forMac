@@ -1,16 +1,27 @@
 #! /bin/bash
-set -o nounset
+# set -o nounset
 set -o errexit
-
-echo "小程序主文件夹名："
 
 send=`date '+%Y-%m-%d %H:%M'`
 Author=${1}
 
-myPages=(
-	test
-	shit
-)
+echo "小程序主文件夹名："
+read rootName
+echo "名为${rootName}的小程序创建成功
+==============================================
+"
+myPages=()
+echo "输入预制的页面：(index,log默认存在，不加后缀，空格隔开，回车生成)"
+read -a myPages
+
+thPage="\"pages\": [
+		\"pages/index/index\",
+		\"pages/log/log\""
+
+# for item in ${myPages[@]}
+# do
+# done
+
 
 # 默认的文件目录，没卵用
 defaultPages=(index log)
@@ -19,31 +30,29 @@ myPagesLen=${#myPages[@]}
 defaultPagesLen=${#defaultPages[@]}
 
 # 创建 主文件夹
-if [ ! -d "DEMO" ]; then
-  mkdir DEMO
+if [ ! -d "${rootName}" ]; then
+  mkdir ${rootName}
 fi
 
-cd DEMO
+cd ${rootName}
 
 # 创建 app.json
-echo '{
-	"pages": [
-		"pages/index/index",
-		"pages/log/log"
+echo "{
+	${thPage}
 	],
-	"window": {
-		"navigationBarTextStyle": "",
-		"navigationBarTitleText": "",
-		"navigationBarBackgroundColor": "",
-		"backgroundColor": ""
+	\"window\": {
+		\"navigationBarTextStyle\": \"\",
+		\"navigationBarTitleText\": \"\",
+		\"navigationBarBackgroundColor\": \"\",
+		\"backgroundColor\": \"\"
 	},
-	"networkTimeout": {
-		"request": 20000,
-		"connectSocket": 20000,
-		"uploadFile": 20000,
-		"downloadFile": 20000
+	\"networkTimeout\": {
+		\"request\": 20000,
+		\"connectSocket\": 20000,
+		\"uploadFile\": 20000,
+		\"downloadFile\": 20000
 	}
-}' > app.json
+}" > app.json
 
 # 创建 app.wxss
 echo '/**app.wxss**/
@@ -133,6 +142,10 @@ if [ ! -d "pages" ]; then
   mkdir pages
 fi
 
+echo "
+==============================================
+ 😊 index目录创建成功
+ 😊 logs目录创建成功"
 cd pages
 
 for PagePath in ${myPages[@]}
@@ -311,3 +324,8 @@ fi
 if [ ! -d "fonts" ]; then
   mkdir fonts
 fi
+
+# 结束
+echo "
+==============================================
+"
