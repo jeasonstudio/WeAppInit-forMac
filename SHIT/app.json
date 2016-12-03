@@ -2,10 +2,7 @@
 	"pages": [
 		"pages/index/index",
 		"pages/log/log",
-"pages/new/new", 
-"pages/add/add", 
-		"pages/Jeason/Jeason",
-		"pages/Perfect/Perfect"
+		"pages/jfm/jfm"
 	],
 	"window": {
 		"navigationBarTextStyle": "",
